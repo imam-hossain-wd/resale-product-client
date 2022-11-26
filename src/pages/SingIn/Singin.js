@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link} from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { userContext } from "../../contexts/authContext/AuthContext";
 
 const Singin = () => {
+  const user = useContext(userContext)
+
  const { register, handleSubmit, formState: { errors } } = useForm();
 
  const logInHandler = (data) => {
         console.log(data);
       }
-
 
     return (
         <div className="w-2/5 mx-auto">
