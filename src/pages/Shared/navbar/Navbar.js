@@ -6,12 +6,12 @@ const Navbar = () => {
     const navmenu = <React.Fragment>
 
  <li> <Link to="/home">Home</Link> </li>
- <li> <Link to="/about">About</Link> </li>
- <li> <Link to="/appointment">Appoinment</Link> </li>
- <li> <Link to="/contact">Contact us</Link> </li>
-<li> <Link to="/deshboard">Deshboard</Link> </li>
+ <li> <Link to="/order">Order</Link> </li>
+ <li> <Link to="/Add A Products">Appoinment</Link> </li>
+ <li> <Link to="/my-products">My Products</Link> </li>
+<li> <Link to="/deshboard">All Products</Link> </li>
 <li> <button> Sing out</button></li>
-<li> <Link to="/login">Log in</Link> </li>  
+<li> <Link to="/singin">Sing in</Link> </li>  
   </React.Fragment> 
   
     return (
@@ -31,26 +31,6 @@ const Navbar = () => {
           <ul className="menu menu-horizontal p-0">
            {navmenu}
           </ul>
-        </div>
-        <div className="navbar-end">
-
-        <div className="dropdown dropdown-end hidden  md:block lg:block">
-      <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-        <div className="w-10 rounded-full">
-          <img src="https://placeimg.com/80/80/people" alt="" />
-        </div>
-      </label>
-      <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52  hidden lg:block">
-        <li className=''>
-          <Link className="justify-between">
-            Profile
-            <span className="badge">New</span>
-          </Link>
-        </li>
-        <li><Link>Logout</Link></li>
-        <li><Link>Settings</Link></li>
-      </ul>
-    </div>
         </div>
       </div>
     );
