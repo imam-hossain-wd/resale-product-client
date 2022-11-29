@@ -1,7 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import { userContext } from '../../../contexts/authContext/AuthContext';
 
 const Navbar = () => {
+  const {logOut, user} = useContext(userContext)
+
+  const handleLogOut = () =>{
+    logOut()
+    .then(() => {
+     toast.success('Sing out Successfully') 
+    }).catch((error) => {
+      console.log(error.message);
+      toast.error(error.message)
+    });
+  }
 
     const navmenu = <React.Fragment>
 
@@ -12,8 +25,11 @@ const Navbar = () => {
 <li> <Link to="/deshboard">All Products</Link> </li>
 <li> <Link to="/blog">Blog
 </Link> </li>
-<li> <button> Sing out</button></li>
+<li> <button onClick={handleLogOut}> Sing out</button></li>
 <li> <Link to="/singin">Sing in</Link> </li>  
+{
+  user && <p>{user.email}</p>
+}
   </React.Fragment> 
      
     return (
