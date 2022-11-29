@@ -5,6 +5,9 @@ import Blog from "../../pages/AddProduct/Blog/Blog";
 import Home from "../../pages/Home/Home";
 import Singin from "../../pages/SingIn/Singin";
 import Singup from "../../pages/Singup/Singup";
+import Profile from '../../pages/profile/Profile'
+import VerifyPayment from "../../pages/verifryPayment/VerifyPayment";
+import Deshboard from "../../pages/deshboard/Deshboard";
 
 export const router = createBrowserRouter([
     {
@@ -29,8 +32,20 @@ export const router = createBrowserRouter([
                 element: <Blog/>
             },
             {
+                path:'/verification',
+                element: <VerifyPayment/>
+            },
+            {
+                path:'/deshboard',
+                element: <Deshboard/>
+            },
+            {
                 path:'/singin',
                 element: <Singin/>
+            },
+            {
+                path:'/profile',
+                element: <Profile/>
             },
             {
                 path:'/singup',

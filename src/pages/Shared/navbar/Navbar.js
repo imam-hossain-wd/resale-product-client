@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { userContext } from '../../../contexts/authContext/AuthContext';
+import {FaCaretDown , FaUserAlt} from 'react-icons/fa';
 
 const Navbar = () => {
   const {logOut, user} = useContext(userContext)
@@ -19,17 +20,30 @@ const Navbar = () => {
     const navmenu = <React.Fragment>
 
  <li> <Link to="/home">Home</Link> </li>
- <li> <Link to="/order">Order</Link> </li>
- <li> <Link to="/addproduct">Add Products</Link> </li>
- <li> <Link to="/my-products">My Products</Link> </li>
-<li> <Link to="/deshboard">All Products</Link> </li>
+ <li> <Link to="/verification">Verify Your Payment</Link> </li>
+ <li> <Link to="/addproduct">All Bikes</Link> </li>
 <li> <Link to="/blog">Blog
 </Link> </li>
-<li> <button onClick={handleLogOut}> Sing out</button></li>
 <li> <Link to="/singin">Sing in</Link> </li>  
-{
-  user && <p>{user.email}</p>
-}
+
+<div className='flex items-center'>
+        <div className="w-10 h-10" >
+        <img src={user?.photoURL} className="rounded-full" alt="" />
+        </div>
+                  <div className="dropdown dropdown-end">
+            <label tabIndex={0} className="btn btn-circle btn-ghost btn-xs text-info">
+              
+            <p className='text-xl text-white'> <FaCaretDown/></p>
+            </label>
+            <div tabIndex={0} className="card compact dropdown-content shadow bg-base-100 rounded-box w-28 mt-5 ml-5">
+              <div className="card-body ">
+              <button  className="text-black font-bold"><Link to="/profile"> Profile </Link></button>
+              <button  className="text-black font-bold"><Link to="/deshboard"> Deshboard </Link></button>
+              <button onClick={handleLogOut}  className="text-black font-bold">Sing out</button>
+           </div>
+         </div>
+       </div>
+     </div>
   </React.Fragment> 
      
     return (
