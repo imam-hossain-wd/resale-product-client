@@ -1,15 +1,32 @@
-import React, { useContext } from "react";
+import React , {useContext} from "react";
 import { Link} from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { userContext } from "../../contexts/authContext/AuthContext";
+import toast from 'react-hot-toast';
+
+
 
 const Singin = () => {
-  const user = useContext(userContext)
-
- const { register, handleSubmit, formState: { errors } } = useForm();
-
+  const { loginUser}= useContext(userContext)
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  
  const logInHandler = (data) => {
-        console.log(data);
+        const email = data.email;
+        const password = data.password;
+        loginUser(email , password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          console.log(user);
+          console.log("Sing in successfully");
+          toast.success("Sing in successfully")
+        })
+        .catch((error) => {
+          const code = error.code;
+          const message = error.message;
+          console.log(code , message);
+          toast.error(code , message)
+        });
+        
       }
 
     return (

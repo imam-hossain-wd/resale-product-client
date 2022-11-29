@@ -7,13 +7,15 @@ const Navbar = () => {
 
  <li> <Link to="/home">Home</Link> </li>
  <li> <Link to="/order">Order</Link> </li>
- <li> <Link to="/Add A Products">Appoinment</Link> </li>
+ <li> <Link to="/addproduct">Add Products</Link> </li>
  <li> <Link to="/my-products">My Products</Link> </li>
 <li> <Link to="/deshboard">All Products</Link> </li>
+<li> <Link to="/blog">Blog
+</Link> </li>
 <li> <button> Sing out</button></li>
 <li> <Link to="/singin">Sing in</Link> </li>  
   </React.Fragment> 
-  
+     
     return (
         <div className="navbar bg-base-100">
         <div className="navbar-start">
