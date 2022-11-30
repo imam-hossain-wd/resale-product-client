@@ -30,7 +30,7 @@ const Singin = () => {
       }
 
     return (
-        <div className="w-2/5 mx-auto">
+        <div className="w-2/5 mx-auto border-4 border-yellow-500 p-5 rounded">
         <form onSubmit={handleSubmit(logInHandler)}>
           <h1 className="text-center text-2xl font-bold  m-5">Sing in</h1>
           <br />
