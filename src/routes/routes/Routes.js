@@ -9,6 +9,7 @@ import Profile from '../../pages/profile/Profile'
 import VerifyPayment from "../../pages/verifryPayment/VerifyPayment";
 import Deshboard from "../../pages/deshboard/Deshboard";
 import AddItem from "../../pages/deshboard/addItem/AddItem";
+import AllMobiles from "../../pages/AllMobiles/AllMobiles";
 
 export const router = createBrowserRouter([
     {
@@ -54,11 +55,12 @@ export const router = createBrowserRouter([
                 element: <Deshboard/>
                
             },
-            // {
-            //     path: 'deshboard/add-an-item',
-            //     element:<AddItem/>
-            
-            // }
+            {
+                path:'/all-mobiles',
+                element: <AllMobiles/>
+               
+            },
+           
         ]
     }
 ])
