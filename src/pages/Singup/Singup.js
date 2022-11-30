@@ -29,15 +29,18 @@ const {createUser, singUpWithGoogleAuth} = useContext(userContext);
         
     }
     return (
-        <div className="w-2/5 mx-auto">
+        <div className="w-2/5 mx-auto border-4 border-yellow-500 p-5 rounded">
         <form onSubmit={handleSubmit(registerHandler)}>
-          <h1 className="text-center text-2xl font-bold  m-5">Sing up</h1>
+          <h1 className="text-center text-3xl font-bold  m-5">Sing up</h1>
           <br />
+       <label htmlFor=""className='mr-3 font-bold text-lg '><input {...register("Account")}  name="name"  type="radio" /> Seller</label>
+        <label htmlFor="" className='font-bold text-lg'><input {...register("Account")} name="name" type="radio" /> Buyer</label>
+
           <input
             {...register("name")}
             type="text"
             placeholder="name"
-            className="input input-bordered w-full mb-4"
+            className="input input-bordered w-full mb-4 mt-3"
           />{" "}
           <br />
           <input
@@ -53,18 +56,19 @@ const {createUser, singUpWithGoogleAuth} = useContext(userContext);
             placeholder="password"
             className="input input-bordered w-full mb-4"
           />{" "}
+          <input type="file" className="file-input input-bordered w-full " />
           <br />
           <div className="flex justify-center m-5">
             <input
               type="submit"
-              className="w-2/5 mx-auto bg-yellow-400 text-black font-bold  p-3 rounded"
+              className="w-3/5 mx-auto bg-yellow-400 text-black font-bold  p-3 rounded"
               value="Sing in"
             />
           </div>
-          <div className='w-full'>
+          <div className='w-full flex justify-center'>
           <button className="btn"> <p className='mr-2'><FaGoogle/></p> Sing up with google</button>
           </div>
-           <p className="text-sm mt-3 text-center">Already Have an Account ?<Link to="/singup" className="btn btn-link capitalize -ml-3">Sing in</Link> </p>
+           <p className="font-bold mt-3 text-center">Already Have an Account ?<Link to="/singin" className="btn btn-link capitalize -ml-3 font-bold">Sing in</Link> </p>
         </form>
       </div>
     );

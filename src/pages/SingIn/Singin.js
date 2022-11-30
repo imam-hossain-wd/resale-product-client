@@ -32,7 +32,7 @@ const Singin = () => {
     return (
         <div className="w-2/5 mx-auto border-4 border-yellow-500 p-5 rounded">
         <form onSubmit={handleSubmit(logInHandler)}>
-          <h1 className="text-center text-2xl font-bold  m-5">Sing in</h1>
+          <h1 className="text-center text-3xl font-bold  m-5">Sing in</h1>
           <br />
           <input
             {...register("email")}
@@ -48,7 +48,7 @@ const Singin = () => {
             className="input input-bordered w-full mb-4"
           />{" "}
           <br />
-          <p className="text-sm mb-2"><Link to="/">Forget password ?</Link> </p>
+          <p className="font-bold mb-2"><Link to="/">Forget password ?</Link> </p>
           <div className="w-4/5">
             <input
               type="submit"
@@ -56,7 +56,7 @@ const Singin = () => {
               value="Sing in"
             />
           </div>
-           <p className="text-sm mt-3 text-center">Have no Account ?<Link to="/singup" className="btn btn-link capitalize -ml-3">Sing up</Link> </p>
+           <p className="font-bold mt-3 text-center">Have no Account ?<Link to="/singup" className="btn btn-link capitalize font-bold -ml-3">Sing up</Link> </p>
         </form>
       </div>
     );
