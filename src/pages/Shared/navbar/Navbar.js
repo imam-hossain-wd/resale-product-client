@@ -26,24 +26,27 @@ const Navbar = () => {
 </Link> </li>
 <li> <Link to="/singin">Sing in</Link> </li>  
 
-<div className='flex items-center'>
-        <div className="w-10 h-10" >
-        <img src={user?.photoURL} className="rounded-full" alt="" />
-        </div>
-                  <div className="dropdown dropdown-end">
-            <label tabIndex={0} className="btn btn-circle btn-ghost btn-xs text-info">
-              
-            <p className='text-xl text-white'> <FaCaretDown/></p>
-            </label>
-            <div tabIndex={0} className="card compact dropdown-content shadow bg-base-100 rounded-box w-28 mt-5 ml-5">
-              <div className="card-body ">
-              <button  className="text-black font-bold"><Link to="/profile"> Profile </Link></button>
-              <button  className="text-black font-bold"><Link to="/deshboard"> Deshboard </Link></button>
-              <button onClick={handleLogOut}  className="text-black font-bold">Sing out</button>
+{
+  user?.uid &&
+  <div className='flex items-center'>
+          <div className="w-10 h-10" >
+          <img src={user?.photoURL} className="rounded-full" alt="" />
+          </div>
+                    <div className="dropdown dropdown-end">
+              <label tabIndex={0} className="btn btn-circle btn-ghost btn-xs text-info">
+                
+              <p className='text-xl text-white'> <FaCaretDown/></p>
+              </label>
+              <div tabIndex={0} className="card compact dropdown-content shadow bg-base-100 rounded-box w-28 mt-5 ml-5">
+                <div className="card-body ">
+                <button  className="text-black font-bold"><Link to="/profile"> Profile </Link></button>
+                <button  className="text-black font-bold"><Link to="/deshboard"> Deshboard </Link></button>
+                <button onClick={handleLogOut}  className="text-black font-bold">Sing out</button>
+             </div>
            </div>
          </div>
        </div>
-     </div>
+}
   </React.Fragment> 
      
     return (

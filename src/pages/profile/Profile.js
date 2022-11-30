@@ -6,7 +6,6 @@ import useTitle from "../../Hooks/UseTitle";
 const Profile = () => {
   useTitle("Profile");
   const { user } = useContext(userContext);
-  console.log(user?.photoURL);
 
   return (
     <section className="w-2/5 mx-auto">

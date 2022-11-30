@@ -36,12 +36,11 @@ const {createUser, singUpWithGoogleAuth} = useContext(userContext);
       .then((result) => {
         const user = result.user;
         console.log(user);
-        // ...
+        toast.success("Register Successfully")
       }).catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(errorCode , errorMessage);
+        console.log( errorMessage);
+        toast.error(errorMessage)
       });
     }
     return (
@@ -49,7 +48,8 @@ const {createUser, singUpWithGoogleAuth} = useContext(userContext);
         <form onSubmit={handleSubmit(registerHandler)}>
           <h1 className="text-center text-3xl font-bold  m-5">Sing up</h1>
           <br />
-       <label htmlFor=""className='mr-3 font-bold text-lg '><input {...register("Account")}  name="name"  type="radio" /> Seller</label>
+       <label htmlFor="Seller"className='mr-3 font-bold text-lg '>
+        <input {...register('food', { required: true })}  name="name"  type="radio" value="Seller" /> Seller</label>
         <label htmlFor="" className='font-bold text-lg'><input {...register("Account")} name="name" type="radio" /> Buyer</label>
 
           <input
