@@ -1,7 +1,9 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
+import useTitle from '../../Hooks/UseTitle';
 
 const VerifyPayment = () => {
+    useTitle('Verify Payment')
     const { register, handleSubmit, formState: { errors } } = useForm();
     const handleVerify = (data) =>{
         console.log(data);

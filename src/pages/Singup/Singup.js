@@ -4,9 +4,11 @@ import { Link } from 'react-router-dom';
 import { userContext } from '../../contexts/authContext/AuthContext';
 import toast from 'react-hot-toast';
 import { FaGoogle } from 'react-icons/fa';
+import useTitle from '../../Hooks/UseTitle';
 
 
 const Singup = () => {
+  useTitle('Sing up')
  const { register, handleSubmit, formState: { errors } } = useForm();
 const {createUser, singUpWithGoogleAuth} = useContext(userContext);
     const registerHandler = (data) => {

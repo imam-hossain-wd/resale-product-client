@@ -3,6 +3,8 @@ import { Link} from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { userContext } from "../../contexts/authContext/AuthContext";
 import toast from 'react-hot-toast';
+import useTitle from "../../Hooks/UseTitle";
+
 
 
 
@@ -10,6 +12,7 @@ const Singin = () => {
   const { loginUser}= useContext(userContext)
   const { register, handleSubmit, formState: { errors } } = useForm();
   
+  useTitle('Singin')
  const logInHandler = (data) => {
         const email = data.email;
         const password = data.password;
