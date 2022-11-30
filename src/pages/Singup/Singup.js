@@ -30,6 +30,20 @@ const {createUser, singUpWithGoogleAuth} = useContext(userContext);
         });
         
     }
+
+    const googleSingInHandler = () =>{
+      singUpWithGoogleAuth()
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        // ...
+      }).catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode , errorMessage);
+      });
+    }
     return (
         <div className="w-2/5 mx-auto border-4 border-yellow-500 p-5 rounded">
         <form onSubmit={handleSubmit(registerHandler)}>
@@ -67,11 +81,12 @@ const {createUser, singUpWithGoogleAuth} = useContext(userContext);
               value="Sing in"
             />
           </div>
+          </form>
           <div className='w-full flex justify-center'>
-          <button className="btn"> <p className='mr-2'><FaGoogle/></p> Sing up with google</button>
+          <button onClick={googleSingInHandler} className="btn"> <p className='mr-2'><FaGoogle/></p> Sing up with google</button>
           </div>
            <p className="font-bold mt-3 text-center">Already Have an Account ?<Link to="/singin" className="btn btn-link capitalize -ml-3 font-bold">Sing in</Link> </p>
-        </form>
+        
       </div>
     );
 };
