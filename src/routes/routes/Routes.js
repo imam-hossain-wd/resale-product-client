@@ -8,6 +8,7 @@ import Singup from "../../pages/Singup/Singup";
 import Profile from '../../pages/profile/Profile'
 import VerifyPayment from "../../pages/verifryPayment/VerifyPayment";
 import Deshboard from "../../pages/deshboard/Deshboard";
+import AddItem from "../../pages/deshboard/addItem/AddItem";
 
 export const router = createBrowserRouter([
     {
@@ -35,10 +36,7 @@ export const router = createBrowserRouter([
                 path:'/verification',
                 element: <VerifyPayment/>
             },
-            {
-                path:'/deshboard',
-                element: <Deshboard/>
-            },
+            
             {
                 path:'/singin',
                 element: <Singin/>
@@ -50,7 +48,17 @@ export const router = createBrowserRouter([
             {
                 path:'/singup',
                 element: <Singup/>
-            }
+            },
+            {
+                path:'/deshboard',
+                element: <Deshboard/>
+               
+            },
+            // {
+            //     path: 'deshboard/add-an-item',
+            //     element:<AddItem/>
+            
+            // }
         ]
     }
 ])
