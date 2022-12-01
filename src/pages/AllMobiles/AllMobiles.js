@@ -6,7 +6,7 @@ const AllMobiles = () => {
 const [mobiles, setMobiles]= useState([]);
 const [selectedMobile, setSelectedMobile]= useState(null);
     useEffect(()=>{
-        fetch("data.json")
+        fetch("http://localhost:5000/mobiles")
         .then(res => res.json())
         .then(data =>setMobiles(data))
     },[])
