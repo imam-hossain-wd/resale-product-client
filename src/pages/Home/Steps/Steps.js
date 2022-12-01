@@ -10,8 +10,8 @@ const Steps = () => {
             </div>
 
 
-            <div className='flex justify-around text-center'>
-                <div className='border-4 rounded  w-64 h-72 p-2' style={{borderColor:"#49C1FE"}}>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4'>
+                <div className='border-4 rounded  w-64 h-72 p-2 mt-10' style={{borderColor:"#49C1FE"}}>
                    <div className='flex justify-center'>
                    <img src={"icon1.jpg"} className="w-20 h-20 m-2" alt="" /> 
                    </div>
@@ -19,7 +19,7 @@ const Steps = () => {
                     <p className='font-bold text-lg m-3'>Login & Discover</p>
                     <p className='text-lg m-2'>Smart filtering and suggestions <br /> make it easy to find</p>
                 </div>
-                <div className='border-4 rounded  w-64 h-72 p-2' style={{borderColor:'#49D7F4'}}>
+                <div className='border-4 rounded  w-64 h-72 p-2 mt-10' style={{borderColor:'#49D7F4'}}>
                    <div className='flex justify-center'>
                    <img src={"icon1.jpg"} className="w-20 h-20 m-2" alt="" /> 
                    </div>
@@ -27,7 +27,7 @@ const Steps = () => {
                     <p className='font-bold text-lg m-3'>Add to Wishlist</p>
                     <p className='text-lg m-2'>Easily select the correct items and add them to the wishlist</p>
                 </div>
-                <div className='border-4 rounded   w-64 h-72 p-2' style={{borderColor:"#E56773"}}>
+                <div className='border-4 rounded   w-64 h-72 p-2 mt-10' style={{borderColor:"#E56773"}}>
                    <div className='flex justify-center'>
                    <img src={"icon1.jpg"} className="w-20 h-20 m-2" alt="" /> 
                    </div>
@@ -35,7 +35,7 @@ const Steps = () => {
                     <p className='font-bold text-lg m-3'>Fast Meet To Find Fast</p>
                     <p className='text-lg m-2'>Meet as soon as to find the best product for your choice</p>
                 </div>
-                <div className='border-4 rounded  w-64 h-72 p-2' style={{borderColor:"#52A57F"}}>
+                <div className='border-4 rounded  w-64 h-72 p-2 mt-10' style={{borderColor:"#52A57F"}}>
                    <div className='flex justify-center'>
                    <img src={"icon1.jpg"} className="w-20 h-20 m-2" alt="" /> 
                    </div>

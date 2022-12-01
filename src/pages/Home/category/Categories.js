@@ -24,7 +24,7 @@ const Categories = () => {
                 <h1 className='text-4xl font-bold m-1'>Check Our All Categors Product</h1>
                 <p className='font-lg'>We are experts in finding the best watches from world-renowned brands including Rolex, <br /> Breitling, Bell & Ross, and many other brands.</p>
             </div>
-        <div className='m-10 flex justify-around'>
+        <div className='m-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 '>
             {
                 categories.map(category => <Category
                 key={category.id}
