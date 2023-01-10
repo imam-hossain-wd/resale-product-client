@@ -10,6 +10,8 @@ import AllMobiles from "../../pages/AllMobiles/AllMobiles";
 import Deshboard from "../../pages/deshboard/deshboard/Deshboard";
 import DeshboardLayout from "../../layout/deshboard/DeshboardLayout";
 import ErrorElement from "../../pages/Shared/errorElement/ErrorElement";
+import AddProduct from "../../pages/deshboard/addProduct/AddProduct";
+import ShowProduct from "../../pages/deshboard/showProduct/ShowProduct";
 
 
 export const router = createBrowserRouter([
@@ -64,12 +66,20 @@ export const router = createBrowserRouter([
         path:'/deshboard',
         element:<DeshboardLayout/>,
         errorElement: <ErrorElement/>,
-        // children: [
-        //     {
-        //         path:'/dashboard',
-        //         element:  <AddProduct/>
-        //     }
-        // ]
+        children: [
+            {
+                path:'/deshboard',
+                element:  <AddProduct/>
+            },
+            {
+                path:'/deshboard/addproduct',
+                element:  <AddProduct/>
+            },
+            {
+                path:'/deshboard/showproduct',
+                element:  <ShowProduct/>
+            },
+        ]
 
     }
 ])

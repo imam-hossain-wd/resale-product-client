@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { userContext } from '../../../contexts/authContext/AuthContext';
-import {FaCaretDown , FaUserAlt} from 'react-icons/fa';
+import {FaCaretDown , FaUser} from 'react-icons/fa';
 
 const Navbar = () => {
   const {logOut, user} = useContext(userContext)
@@ -35,7 +35,7 @@ const Navbar = () => {
                     <div className="dropdown dropdown-end">
               <label tabIndex={0} className="btn btn-circle btn-ghost btn-xs text-info">
                 
-              <p className='text-xl text-white'> <FaCaretDown/></p>
+              <p className='text-xl '> <FaUser/></p>
               </label>
               <div tabIndex={0} className="card compact dropdown-content shadow bg-base-100 rounded-box w-28 mt-5 ml-5">
                 <div className="card-body ">
@@ -70,6 +70,9 @@ const Navbar = () => {
            {navmenu}
           </ul>
         </div>
+        <label htmlFor="dashboard-drawer" tabIndex={2} className="btn btn-ghost lg:hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+            </label>
       </div>
     );
 };
