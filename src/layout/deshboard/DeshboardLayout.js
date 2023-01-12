@@ -24,6 +24,9 @@ const DeshboardLayout = () => {
             <li>
               <Link to="/deshboard/showproduct">Show Product</Link>
             </li>
+            <li>
+              <Link to="/deshboard/showproduct">Booking</Link>
+            </li>
           </ul>
         </div>
       </div>
