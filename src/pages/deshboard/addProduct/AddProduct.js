@@ -88,7 +88,7 @@ const AddProduct = () => {
   return (
     <div className="rounded">
       <div>
-        <h1 className="text-center text-3xl font-bold ">Add Product</h1>
+        <h1 className="text-center text-3xl font-bold my-5">Add Product</h1>
       </div>
       <br />
 

@@ -1,14 +1,16 @@
-import React from "react";
-import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
-const MobileModal = ({selectedMobile, setSelectedMobile}) => {
+const AdvertiseModal = ({selectedAdvertise}) => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    // console.log("selected mobile is",selectedMobile);
-    // const {name, price, img, Condition , userName } = selectedMobile;
+    const [advertise , setAdvertise] = useState([])
 
-  const {categories,condition,description,location,orginalPrice,productName,productPhoto,publishDat,resalePrice,sellerEmail,sellerName,useDuration,
-    } = selectedMobile;
+    console.log("selected advertised",selectedAdvertise);
+
+//   const { productPhoto, productName, sellerName, resalePrice, orginalPrice, location, categories, condition, useDuration, sellerEmail, publishDat, description,
+//   } = selectedAdvertise;
+
 
     const bookingHandler = (data)=>{
         console.log(data);
@@ -21,19 +23,17 @@ const MobileModal = ({selectedMobile, setSelectedMobile}) => {
         //     image: img,
         // }
         // console.log(booking);
-        setSelectedMobile(null)
+        // setAdvertise(null)
 
     }
-
-
-  return (
-    <div>
+    return (
+        <div>
    
-      <input type="checkbox" id="my-modal-3" className="modal-toggle" />
+      <input type="checkbox" id="advertise-modal" className="modal-toggle" />
       <div className="modal">
         <div className="modal-box relative">
           <label
-            htmlFor="my-modal-3"
+            htmlFor="advertise-modal"
             className="btn btn-sm btn-circle absolute right-2 top-2"
           >
             ✕
@@ -44,7 +44,6 @@ const MobileModal = ({selectedMobile, setSelectedMobile}) => {
           <input
             {...register("email")}
             type="email"
-            defaultValue={sellerEmail}
             className="input input-bordered w-full mb-4"
           />{" "}
           <br />
@@ -96,7 +95,7 @@ const MobileModal = ({selectedMobile, setSelectedMobile}) => {
         </div>
       </div>
     </div>
-  );
+    );
 };
 
-export default MobileModal;
+export default AdvertiseModal;

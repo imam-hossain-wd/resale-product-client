@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { useContext } from "react";
 import { toast } from "react-hot-toast";
 import { userContext } from "../../../contexts/authContext/AuthContext";
@@ -16,12 +17,16 @@ const ShowProduct = () => {
     queryKey: ["addProducts"],
     queryFn: async () => {
       const res = await fetch(`http://localhost:5000/addproduct?email=${user?.email}`);
-
-      // const res = await fetch("http://localhost:5000/addproduct");
       const data = await res.json();
       return data;
     },
   });
+
+  useEffect(()=>{
+    fetch("http://localhost:5000/addproduct?email=toyedal140@vingood.com")
+    .then(res => res.json())
+    .then(data => console.log(data))
+  },[])
 
 
   const deleteHandlerProduct = product => {
@@ -43,13 +48,33 @@ const closeModal = () => {
     setDeletingProduct(null);
 }
 
+const advertiserHandler = (addProduct) => {
+  console.log(addProduct);
+
+  fetch("http://localhost:5000/advertise", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(addProduct),
+          })
+            .then((res) => res.json())
+            .then((result) => {
+              console.log(result);
+              toast.success(`${addProduct.productName} is added advertise successfully`);
+              
+            });
+
+}
+
 if (isLoading) {
     return <Loading></Loading>
 }
 
+
   return (
     <div>
-      <h3 className="text-3xl mb-5">My Products</h3>
+      <h3 className="text-3xl my-5 text-center text-3xl font-bold">My Products</h3>
       <div className="overflow-x-auto">
         <table className="table w-full">
           <thead>
@@ -77,7 +102,7 @@ if (isLoading) {
                   </th>
                   <td>{addProduct.productName}</td>
                   <td className="text-red-500">Sales</td>
-                  <td><button className="btn btn-xs h-9 w-20 border-0 normal-case bg-green-600">Advertise</button></td>
+                 { <td><button onClick={()=> advertiserHandler(addProduct)} className="btn btn-xs h-9 w-20 border-0 normal-case bg-green-600">Advertise</button></td>}
 
                   <td>
                   

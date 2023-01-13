@@ -13,15 +13,15 @@ const AuthContext = ({children}) => {
     const [loading, setLoading] = useState(true);
 
     const createUser = (email, password) =>{
-        return createUserWithEmailAndPassword(auth, email, password)
         setLoading(true)
-      }
+        return createUserWithEmailAndPassword(auth, email, password)
+    }
       const updateUserProfile = (profile) => {
         return updateProfile(auth.currentUser, profile);
     }
       const loginUser = (email , password)=>{
+          setLoading(true)
        return signInWithEmailAndPassword(auth, email, password)
-       setLoading(true)
       }
 
       const logOut = ()=>{
@@ -44,13 +44,16 @@ useEffect(()=>{
     }
 },[]);
 
+
+
     const userInfo = {
         loginUser,
         createUser,
         updateUserProfile,
         singUpWithGoogleAuth,
         logOut,
-        user
+        user,
+        
     }
     return (
         <userContext.Provider value={userInfo}>

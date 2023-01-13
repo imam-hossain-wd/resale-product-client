@@ -12,6 +12,8 @@ import DeshboardLayout from "../../layout/deshboard/DeshboardLayout";
 import ErrorElement from "../../pages/Shared/errorElement/ErrorElement";
 import AddProduct from "../../pages/deshboard/addProduct/AddProduct";
 import ShowProduct from "../../pages/deshboard/showProduct/ShowProduct";
+import MyOrder from "../../pages/deshboard/MyOrder/MyOrder";
+
 
 
 export const router = createBrowserRouter([
@@ -78,6 +80,10 @@ export const router = createBrowserRouter([
             {
                 path:'/deshboard/showproduct',
                 element:  <ShowProduct/>
+            },
+            {
+                path:'/deshboard/order',
+                element:<MyOrder/>
             },
         ]
 

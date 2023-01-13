@@ -6,10 +6,12 @@ const AllMobiles = () => {
 const [mobiles, setMobiles]= useState([]);
 const [selectedMobile, setSelectedMobile]= useState(null);
     useEffect(()=>{
-        fetch("http://localhost:5000/mobiles")
+        fetch("http://localhost:5000/addproduct")
         .then(res => res.json())
         .then(data =>setMobiles(data))
     },[])
+
+    console.log('selected mobile is ', selectedMobile);
     
     return (
         <div>
@@ -19,9 +21,10 @@ const [selectedMobile, setSelectedMobile]= useState(null);
             {
                 mobiles.map(mobile=> <Mobile
                 
-                key={mobile.id}
+                key={mobile._id}
                 mobile={mobile}
                 setSelectedMobile={setSelectedMobile}
+                selectedMobile={selectedMobile}
                 ></Mobile> )
 
             }

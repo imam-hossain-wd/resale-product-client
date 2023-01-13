@@ -1,11 +1,29 @@
-import React, { useContext } from 'react';
+import React, { useState,useContext } from 'react';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import { userContext } from '../../../contexts/authContext/AuthContext';
 import {FaCaretDown , FaUser} from 'react-icons/fa';
+import Loading from '../loading/Loading';
+import useData from '../../../Hooks/useData';
+import { useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
+
 
 const Navbar = () => {
-  const {logOut, user} = useContext(userContext)
+  const {logOut, user, userData,isLoading} = useContext(userContext);
+
+  
+
+//   const { isLoading, data:useData =[] } = useQuery({
+//     queryKey: ['userData'],
+//     queryFn: () =>
+//       fetch('http://localhost:5000/users').then(
+//         (res) => res.json(),
+//       ),
+//   })
+
+//  const dataUser = useData?.map((accountData )=> accountData.accountType)
+
 
   const handleLogOut = () =>{
     logOut()
@@ -21,7 +39,8 @@ const Navbar = () => {
 
  <li> <Link to="/home">Home</Link> </li>
  <li> <Link to="/verification">Verify Your Payment</Link> </li>
- <li> <Link to="/all-mobiles">All Mobiles</Link> </li>
+<li> <Link to="/all-mobiles">All Mobiles</Link> </li> 
+
 <li> <Link to="/blog">Blog
 </Link> </li>
 <li> <Link to="/singin">Sing in</Link> </li>  
@@ -48,6 +67,10 @@ const Navbar = () => {
        </div>
 }
   </React.Fragment> 
+
+  if(isLoading){
+    <Loading></Loading>
+  }
      
     return (
         <div className="navbar bg-base-100">
@@ -68,6 +91,7 @@ const Navbar = () => {
           <ul className="menu menu-horizontal p-0">
           
            {navmenu}
+
           </ul>
         </div>
         <label htmlFor="dashboard-drawer" tabIndex={2} className="btn btn-ghost lg:hidden">
