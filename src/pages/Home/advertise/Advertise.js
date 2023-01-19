@@ -1,41 +1,32 @@
-import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useEffect } from "react";
+import { useContext } from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { userContext } from "../../../contexts/authContext/AuthContext";
+import useReport from "../../../Hooks/useReport";
+import BookingModel from "../../Shared/BookingModel/BookingModel";
 import Loading from "../../Shared/loading/Loading";
-import AdvertiseModal from "../advertiseModal/AdvertiseModal";
 
 const Advertise = () => {
-  const [selectedAdvertise, setSelectedAdvertise] = useState(null);
+  const [bookingData, setBookingData] = useState("");
+  const [advertises, setAdvertises] = useState([]);
+  const [reportId, setReportId] = useState("");
+  const { user, isLoading } = useContext(userContext);
 
-  const { isLoading, data: advertises = [] } = useQuery({
-    queryKey: ["repoData"],
-    queryFn: () =>
-      fetch("http://localhost:5000/advertise").then((res) => res.json()),
-  });
+  useReport(reportId);
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/advertise`)
+      .then((res) => res.json())
+      .then((data) => setAdvertises(data));
+  }, []);
 
   if (isLoading) {
     <Loading></Loading>;
   }
 
-//   const {
-//     productPhoto,
-//     productName,
-//     sellerName,
-//     resalePrice,
-//     orginalPrice,
-//     location,
-//     categories,
-//     condition,
-//     useDuration,
-//     sellerEmail,
-//     publishDat,
-//     description,
-//   } = advertises;
-
   return (
     <div>
-      {advertises.length && (
+      {advertises?.length && (
         <div className="mb-10">
           <h1 className="text-center font-bold text-2xl">Featured Mobiles</h1>
           <p className="text-center  ">
@@ -61,10 +52,16 @@ const Advertise = () => {
               <p>Location : {advertise.location}</p>
               <p>Publish Date : {advertise.publishDat}</p>
               <p>Used : {advertise.useDuration}</p>
+              <p
+                onClick={() => setReportId(advertise._id)}
+                className="btn-outline w-24 btn-error font-bold w-32 btn btn-xs"
+              >
+                Report
+              </p>
               <div className="card-actions justify-center">
                 <label
-                  htmlFor="advertise-modal"
-                  onClick={() => setSelectedAdvertise(advertise)}
+                  htmlFor="booking-model"
+                  onClick={() => setBookingData(advertise)}
                   className="btn btn-primary w-60 mt-3"
                 >
                   Check out
@@ -74,9 +71,12 @@ const Advertise = () => {
           </div>
         ))}
       </div>
-      <AdvertiseModal 
-      selectedAdvertise={selectedAdvertise}
-      />
+      {bookingData && (
+        <BookingModel
+          bookingData={bookingData}
+          setBookingData={setBookingData}
+        />
+      )}
     </div>
   );
 };

@@ -1,28 +1,16 @@
-import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useContext } from "react";
 import { Link, Outlet } from "react-router-dom";
+import { userContext } from "../../contexts/authContext/AuthContext";
+import useAdmin from "../../Hooks/useAdmin";
+import useSeller from "../../Hooks/useSeller";
 import Navbar from "../../pages/Shared/navbar/Navbar";
 
 const DeshboardLayout = () => {
-  const [userData, setUserData] = useState([])
-
-  // const { isLoading, data:useData =[] } = useQuery({
-  //   queryKey: ['userData'],
-  //   queryFn: () =>
-  //     fetch('http://localhost:5000/users').then(
-  //       (res) => res.json(),
-  //     ),
-  // })
-  // console.log('deshboard');
-
-
-//  const accountData = useData?.map((accountData )=> accountData.accountType==="seller")
-
-//  console.log('...............', accountData);
-// console.log(useData);
-
+  const { user } = useContext(userContext);
+  const [isSeller] = useSeller(user?.email);
+  const [isAdmin] = useAdmin(user?.email)
+  
 
   return (
     <div>
@@ -39,24 +27,41 @@ const DeshboardLayout = () => {
         <div className="drawer-side">
           <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
           <ul className="menu p-4 w-80 text-base-content">
-
-           {  <>
-           
-           <li>
-              <Link to="/deshboard/addproduct">Add A Product</Link>
+            {isSeller ? 
+              <>
+                <li>
+                  <Link to="/deshboard/addproduct">Add A Product</Link>
+                </li>
+                <li>
+                  <Link to="/deshboard/showproduct">Show Product</Link>
+                </li>
+                <li>
+                  <Link to="/deshboard/order">My Order</Link>
+                </li>
+              </> :
+              <>
+              {
+              isAdmin ? <> <li>
+              <Link to="/deshboard/allsellers">All Sellers</Link>
             </li>
             <li>
-              <Link to="/deshboard/showproduct">Show Product</Link>
+              <Link to="/deshboard/allbuyers">All Buyers</Link>
             </li>
             <li>
-              <Link to="/deshboard/order">My Order</Link>
+              <Link to="/deshboard/reported-products">Reported Products</Link>
             </li>
-           </> }
+            </> :
+              <li>
+              <Link to="/deshboard/booking">Booking</Link>
+            </li>
+            }
+              
+              </>
+             
+            }
+            
 
-             <li>
-              <Link to="/deshboard/order">Booking</Link>
-            </li> 
-
+            
           </ul>
         </div>
       </div>

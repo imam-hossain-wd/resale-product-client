@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Category = ({category}) => {
-    console.log(category);
+    
     const {img , name} = category;
     return (
         <div className='border-4 rounded p-5 border-orange-300 h-96 w-80 mt-10'>

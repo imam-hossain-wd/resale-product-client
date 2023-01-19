@@ -10,22 +10,23 @@ const googleProvider = new GoogleAuthProvider()
 export const userContext = createContext()
 const AuthContext = ({children}) => {
     const [user, setUser] = useState({})
-    const [loading, setLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
 
     const createUser = (email, password) =>{
-        setLoading(true)
+        setIsLoading(true)
         return createUserWithEmailAndPassword(auth, email, password)
     }
       const updateUserProfile = (profile) => {
         return updateProfile(auth.currentUser, profile);
     }
+
       const loginUser = (email , password)=>{
-          setLoading(true)
+        setIsLoading(true)
        return signInWithEmailAndPassword(auth, email, password)
       }
 
       const logOut = ()=>{
-        setLoading(true)
+        setIsLoading(true)
         return signOut(auth)
     }
        // sing in with google 
@@ -36,7 +37,7 @@ const singUpWithGoogleAuth = ()=>{
 useEffect(()=>{
     const unsubscribe =  onAuthStateChanged(auth, currentUser => {
         setUser(currentUser);
-        setLoading(false)
+        setIsLoading(false)
     })
 
     return () => {
@@ -53,6 +54,7 @@ useEffect(()=>{
         singUpWithGoogleAuth,
         logOut,
         user,
+        isLoading
         
     }
     return (

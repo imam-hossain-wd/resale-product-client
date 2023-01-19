@@ -1,6 +1,6 @@
+import { async } from "@firebase/util";
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
-import { useEffect } from "react";
 import { useContext } from "react";
 import { toast } from "react-hot-toast";
 import { userContext } from "../../../contexts/authContext/AuthContext";
@@ -8,26 +8,26 @@ import ConfirmationModal from "../../Shared/confirmationModel/ConfirmationModal"
 import Loading from "../../Shared/loading/Loading";
 
 const ShowProduct = () => {
-  const {user}= useContext(userContext)
+  const {user, isLoading}= useContext(userContext)
     const [deletingProduct, setDeletingProduct] = useState(null);
+  
 
-    console.log('user ', user?.email);
-
-  const { data: addProducts = [], refetch, isLoading } = useQuery({
-    queryKey: ["addProducts"],
-    queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/addproduct?email=${user?.email}`);
-      const data = await res.json();
-      return data;
-    },
-  });
-
-  useEffect(()=>{
-    fetch("http://localhost:5000/addproduct?email=toyedal140@vingood.com")
-    .then(res => res.json())
-    .then(data => console.log(data))
-  },[])
-
+    const url = `http://localhost:5000/addproduct?email=${user?.email}`
+    const { data: addProducts = [],refetch } = useQuery({
+      queryKey: ['bookings', user?.email],
+      queryFn: async () => {
+        
+         
+          const res = await fetch(url, {
+            headers: {
+                authorization: `bearer ${localStorage.getItem('accessToken')}`
+            }
+        });
+        const data = await res.json();
+        return data;
+         
+      }
+  })
 
   const deleteHandlerProduct = product => {
     fetch(`http://localhost:5000/products/${product._id}`, {
@@ -39,8 +39,8 @@ const ShowProduct = () => {
     .then(res => res.json())
     .then(data => {
         if(data.deletedCount > 0){
-            refetch();
-            toast.success(`Doctor ${product.productName} deleted successfully`)
+          refetch()
+            toast.success(`${product.productName} deleted successfully`)
         }
     })
 }
@@ -48,24 +48,28 @@ const closeModal = () => {
     setDeletingProduct(null);
 }
 
-const advertiserHandler = (addProduct) => {
-  console.log(addProduct);
 
-  fetch("http://localhost:5000/advertise", {
-            method: "POST",
-            headers: {
-              "content-type": "application/json",
-            },
-            body: JSON.stringify(addProduct),
-          })
-            .then((res) => res.json())
-            .then((result) => {
-              console.log(result);
-              toast.success(`${addProduct.productName} is added advertise successfully`);
-              
-            });
 
+const makeAdvertiserHandler = id => {
+
+  console.log(id);
+  fetch(`http://localhost:5000/addproduct/advertise/${id}`, {
+      method: 'PUT',
+      // headers: {
+      //     authorization: `bearer ${localStorage.getItem('accessToken')}`
+      // }
+  })
+  .then(res => res.json())
+  .then(data => {
+      if(data.modifiedCount > 0){
+        refetch()
+          toast.success('Make advertise successfully')
+          
+      }
+  })
 }
+
+
 
 if (isLoading) {
     return <Loading></Loading>
@@ -102,7 +106,9 @@ if (isLoading) {
                   </th>
                   <td>{addProduct.productName}</td>
                   <td className="text-red-500">Sales</td>
-                 { <td><button onClick={()=> advertiserHandler(addProduct)} className="btn btn-xs h-9 w-20 border-0 normal-case bg-green-600">Advertise</button></td>}
+                 
+                 <td>{addProduct?.publish !== "advertise" && <button onClick={() => makeAdvertiserHandler(addProduct._id)} className='btn btn-xs h-9 w-20 border-0 normal-case bg-green-600'>Advertise</button>}</td>
+                 
 
                   <td>
                   

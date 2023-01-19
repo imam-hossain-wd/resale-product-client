@@ -1,26 +1,34 @@
-import React, { useContext } from "react";
+import React from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { userContext } from "../../contexts/authContext/AuthContext";
-import useTitle from "../../Hooks/UseTitle";
+import { userContext } from "../../../contexts/authContext/AuthContext";
+import useTitle from "../../../Hooks/UseTitle";
+import Loading from "../../Shared/loading/Loading";
 
-const Profile = () => {
-  useTitle("Profile");
-  const { user } = useContext(userContext);
-
+const DeshboardProfile = () => {
+  const { user, isLoading } = useContext(userContext);
+  useTitle('Deshboard')
+  if(isLoading){
+    <Loading></Loading>
+  }
   return (
-    <section className="w-2/5 mx-auto">
-      <div className="flex flex-col justify-center max-w-xs p-6 shadow-md rounded-xl sm:px-12 dark:bg-gray-900 dark:text-gray-100">
+    <section className="my-3">
+      <h1 className="text-3xl font-bold text-center mb-10">
+        Welcome To Deshboard
+      </h1>
+
+      <div className="flex flex-col justify-center w-3/5 mx-auto  p-6 shadow-md rounded-xl sm:px-12 dark:bg-gray-900 dark:text-gray-100">
         <img
-          src={user?.photoURL}
+          src="https://contentstatic.techgig.com/photo/76118246/5-personal-characteristics-of-successful-programmers.jpg?119058"
           alt=""
-          className="w-32 h-32 mx-auto rounded-full dark:bg-gray-500 aspect-square"
+          className="w-40 h-40 mx-auto rounded-full dark:bg-gray-500 aspect-square"
         />
         <div className="space-y-4 text-center divide-y divide-gray-700">
           <div className="my-2 space-y-1">
             <h2 className="text-xl font-semibold sm:text-2xl">
               {user?.displayName}
-              
             </h2>
+            <h2 className="text-xl font-semibold sm:text-2xl">{user?.email}</h2>
             <p className="px-5 text-xs sm:text-base dark:text-gray-400">
               Full-stack developer
             </p>
@@ -89,4 +97,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default DeshboardProfile;

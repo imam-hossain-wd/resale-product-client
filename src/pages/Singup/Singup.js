@@ -1,20 +1,26 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { userContext } from "../../contexts/authContext/AuthContext";
 import toast from "react-hot-toast";
 import { FaGoogle } from "react-icons/fa";
 import useTitle from "../../Hooks/UseTitle";
+import { useState } from "react";
+import useToken from "../../Hooks/useToken";
 
 const Singup = () => {
+  const navigate = useNavigate();
   useTitle("Sing up");
+  const [createdUserEmail, setCreatedUserEmail] = useState('')
+    const [token] = useToken(createdUserEmail);
+
+    if(token){
+      navigate('/')
+     
+    }  
   const imageHostKey = process.env.REACT_APP_imgbb_key;
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-  const { createUser, singUpWithGoogleAuth } = useContext(userContext);
+  const {  register,  handleSubmit,  formState: { errors }} = useForm();
+  const { createUser, singUpWithGoogleAuth, updateUserProfile } = useContext(userContext);
   const registerHandler = (data) => {
     const name = data.name;
     const email = data.email;
@@ -32,8 +38,8 @@ const Singup = () => {
     })
       .then((res) => res.json())
       .then((imgData) => {
+
         if (imgData.success) {
-          console.log(imgData.data.url);
           const user = {
             name,
             email,
@@ -53,14 +59,23 @@ const Singup = () => {
               console.log(result);
               toast.success(`${data.name} is added successfully`);
             });
-        }
-      });
+      }});
 
     createUser(email, password)
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
         toast.success("Sing up Successfully");
+          
+        const userInfo = {
+          displayName : name,         
+        }
+        updateUserProfile(userInfo)
+        .then(() => {
+          setCreatedUserEmail(email)
+      })
+      .catch(err => console.log(err));
+      
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -74,7 +89,30 @@ const Singup = () => {
     singUpWithGoogleAuth()
       .then((result) => {
         const user = result.user;
-        console.log(user);
+        const userEmail = user.email; 
+        if(user.uid){
+          const saveUser ={
+            name : user.displayName,
+            email : user.email,
+            image :user.photoURL,
+            accountType: "seller"
+          }
+          console.log(saveUser);
+          fetch("http://localhost:5000/user", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(saveUser),
+          })
+            .then((res) => res.json())
+            .then((result) => {
+              console.log(result);
+
+              setCreatedUserEmail(userEmail)
+              toast.success(`user is added successfully`);
+            });
+        }
         toast.success("Register Successfully");
       })
       .catch((error) => {
@@ -82,6 +120,8 @@ const Singup = () => {
         console.log(errorMessage);
         toast.error(errorMessage);
       });
+  
+      // getjwt for google
   };
   return (
     <div className="w-2/5 mx-auto border-4 border-yellow-500 p-5 rounded">
